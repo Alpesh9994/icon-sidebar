@@ -1,0 +1,182 @@
+<div class="sidebar_wrapper"
+>
+  <div class="sidebar-overlay"
+     [class.open]="isMobileOpen"
+     (click)="close.emit()">
+  </div>
+  <div class="sidebar" [class.open]="isMobileOpen" (click)="$event.stopPropagation()">
+    <div class="sidebar_inner">
+      <div class="sidebar_header">
+        <div class="sidebar_header__inner">
+          <div class="sidebar_brand">
+            <img src="../../assets/icons/brand-icon.svg" alt="" class="sidebar_brand_logo">
+            <div class="pixel-grid" #pixelGrid></div>
+          </div>
+        </div>
+        <div class="sidemenu_search-icon" (click)="toggleSearch()">
+          <img src="assets/icons/menu-search-icon.svg" alt="">
+        </div>
+      </div>
+  
+      <div class="sidebar_menu__wrapper">
+        <div class="sidebar_menuitems">
+          <div class="sidebar_menuitem" *ngFor="let item of menuItems">
+            <button 
+              class="sidebar_menu level1_menu"
+              *ngIf="!item.children.length"
+              [routerLink]="item.routerLink"
+              routerLinkActive="active"
+              (click)="closeAllMenus()"
+              [title]="item.label"
+            >
+              <img [src]="'assets/icons/' + (item.icon.endsWith('.svg') ? item.icon : item.icon + '.svg')" [alt]="item.icon" class="menu_item__icon" />
+            </button>
+            <button 
+              class="sidebar_menu level1_menu"
+              *ngIf="item.children.length"
+              (click)="toggleSubmenu(item.id)"
+              [ngClass]="{'active': isSubmenuExpanded(item.id) || hasActiveDescendant(item)}"
+              [title]="item.label"
+            >
+              <img [src]="'assets/icons/' + (item.icon.endsWith('.svg') ? item.icon : item.icon + '.svg')" [alt]="item.icon" class="menu_item__icon" />
+            </button>
+          </div>
+          
+        </div>
+      </div>
+      <div class="close-mobile__sidebar" (click)="close.emit()">
+        <img src="assets/icons/sidebar-fold-line.svg" alt="">
+      </div>
+    </div>
+  </div>
+  <ng-container *ngFor="let item of menuItems">
+    <div 
+      class="sidebar_submenu__wrapper"
+      [class.active]="
+        item.children &&
+        isSubmenuExpanded(item.id) &&
+        (isMobileOpen || !isMobileView)
+      "
+    >
+      <div class="level2_header">
+        <span class="level2_title">{{ item.label }}</span>
+        <button class="level2_close__btn" (click)="toggleSubmenu(item.id)">
+          <span class="close_btn__first-cross"></span>
+          <span class="close_btn__second-cross"></span>
+        </button>
+      </div>
+
+      <div class="sidebar_submenu__items-outer">
+        <div class="sidebar_submenu__items">
+          <ng-container
+            *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children, level: 2 }">
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="sidebar_submenu__wrapper" [class.active]="isSearchOpen && (isMobileOpen || !isMobileView)">
+    <div class="level2_header">
+      <span class="level2_title">Menu Search</span>
+      <button class="level2_close__btn" (click)="toggleSearch()">
+        <span class="close_btn__first-cross"></span>
+        <span class="close_btn__second-cross"></span>
+      </button>
+    </div>
+  
+    <div class="sidemenu_searchbar">
+      <input class="sidemenu_searchbar-input" type="text" placeholder="Menu search..." [(ngModel)]="searchTerm" (input)="onSearchChange()" />
+    </div>
+
+    <div class="sidebar_submenu__items-outer">
+  
+  
+      <div class="sidebar_submenu__items">
+  
+        <button class="sidebar_submenu__item level2_item" *ngFor="let menu of filteredMenuList"
+          [routerLink]="menu.routerLink" (click)="handleSearchItemClick();">
+          <div class="sidebar_submenu__bullet"></div>
+          <span class="sidebar_submenu__label">
+            {{ menu.label }}
+          </span>
+        </button>
+  
+        <div *ngIf="!searchTerm" class="search_notfound">
+          Start typing to search
+        </div>
+
+        <div *ngIf="searchTerm && !filteredMenuList.length" class="search_notfound">
+          No results found
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<ng-template #recursiveMenu let-items let-level="level">
+
+  <div 
+    [ngClass]="
+      menu.children.length ? 'sidebar_submenu__item-inner' : ''
+    "
+    *ngFor="let menu of items"
+  >
+
+    <!-- 🔹 Leaf Node -->
+    <button
+      *ngIf="!menu.children.length"
+      [ngClass]="
+        level > 2 ? 'level3_submenu__item' : 'sidebar_submenu__item'
+      "
+      [routerLink]="menu.routerLink"
+      routerLinkActive="active"
+      (click)="closeAllMenus()"
+      [title]="menu.label"
+    >
+      <div *ngIf="level === 2" class="sidebar_submenu__bullet"></div>
+      <span class="sidebar_submenu__label">
+        {{ menu.label }}
+      </span>
+    </button>
+
+    <!-- 🔹 Parent Node -->
+    <button
+      *ngIf="menu.children.length"
+      [ngClass]="
+        level < 3 ? 'sidebar_submenu__item' : 'level3_submenu__item'
+      "
+      class="has_children"
+      [class.expanded]="expandedByLevel[level] === menu.id"
+      [class.active]="hasActiveDescendant(menu)"
+      (click)="toggleDynamicSubmenu(menu.id, level)"
+      [title]="menu.label"
+    >
+      <div *ngIf="level === 2" class="sidebar_submenu__bullet"></div>
+      <span class="menu_item__label">
+        {{ menu.label }}
+      </span>
+
+      <ion-icon
+        name="chevron-down-outline"
+        class="submenu_item__toggle"
+        [class.toggled]="expandedByLevel[level] === menu.id">
+      </ion-icon>
+    </button>
+
+    <!-- 🔥 Recursive Call -->
+    <div
+      *ngIf="menu.children.length"
+      class="level3_submenu__wrapper"
+      [class.expanded]="expandedByLevel[level] === menu.id"
+    >
+      <ng-container
+        *ngTemplateOutlet="recursiveMenu; context: { $implicit: menu.children, level: level + 1 }">
+      </ng-container>
+    </div>
+
+  </div>
+
+</ng-template>

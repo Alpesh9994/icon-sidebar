@@ -1,0 +1,22 @@
+<div class="main_layout">
+  <!-- Sidebar -->
+  <app-sidebar 
+    [isMobileOpen]="isMobileSidebarOpen && isMobileView"
+    [isMobileView]="isMobileView"
+    (close)="closeSidebar()"
+  ></app-sidebar>
+
+
+  <!-- Main Content Area -->
+  <div class="inner_layout">
+    <!-- Top Navbar -->
+    <app-navbar (menuClick)="toggleSidebar()"></app-navbar>
+
+    <!-- Dashboard Content -->
+    <div class="main_content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+</div>
