@@ -1,0 +1,39 @@
+.breadcrumb_container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.breadcrumb_title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumb_path {
+  font-size: 12px;
+  line-height: 1;
+  color: #5f6b7a;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.separator {
+  margin: 0 6px;
+  color: #9aa8b8;
+}
+
+@media screen and (min-width: 1920px) {
+  .breadcrumb_title{font-size: 20px;}
+  .breadcrumb_path{font-size: 14px;}
+}
+
+@media screen and (max-width: 1024.98px) {
+  .breadcrumb_path{
+    display: none;
+  }
+}

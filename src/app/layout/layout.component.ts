@@ -6,6 +6,7 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
+  
 
   isMobileSidebarOpen = false;
   isMobileView = window.innerWidth <= 1024;

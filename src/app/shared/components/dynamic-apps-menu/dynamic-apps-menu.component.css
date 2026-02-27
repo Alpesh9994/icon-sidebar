@@ -1,0 +1,251 @@
+::ng-deep .cdk-overlay-container .cdk-overlay-connected-position-bounding-box:has(.apps_menu){
+  transform: unset !important;
+}
+
+
+
+::ng-deep .apps_menu .mat-menu-content{
+  /* display: grid;
+  column-gap: 12px;
+  row-gap: 12px;
+  grid-template-columns: repeat(3, 1fr); */
+  width: 100%;
+}
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item{
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: auto !important;
+  min-height: 55px;
+  gap: 5px;
+  border: 0px !important;
+  padding: 5px ;
+  position: relative;
+  z-index: 0;
+  transition: 0.3s ease;
+
+  outline: none;
+}
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item .apps_menu__icon{
+  width: 40px;
+}
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item .apps_menu__name{
+  display: block;
+  margin-bottom: 0px;
+  color: #1d1a1a;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+}
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: #6699D2;
+  z-index: -1;
+  transition: 0.3s ease;
+}
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item:hover{
+  background: unset !important;
+}
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item:hover::after{
+  width: 100%;
+}
+
+@media screen and (min-width: 1025px) {
+  ::ng-deep .apps_menu.mat-menu-panel{
+    /* min-width: 330px !important; */
+  }
+  /* ::ng-deep .apps_menu .mat-menu-content{
+    column-gap: 12px;
+  } */
+  ::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item .apps_menu__icon{
+    width: 50px;
+  }
+  ::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .apps_menu__name{
+    font-size: 15px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  /* ::ng-deep .apps_menu.mat-menu-panel{
+    min-width: 380px;
+  } */
+  ::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item .apps_menu__icon{
+    width: 37px;
+  }
+  ::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .apps_menu__name{
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  ::ng-deep .apps_menu.mat-menu-panel .mat-menu-content .apps_menu__item{
+    height: auto !important;
+  }
+}
+
+
+/* org copy  */
+::ng-deep .cdk-overlay-container .cdk-overlay-connected-position-bounding-box:has(.apps_menu){
+  transform: unset !important;
+}
+
+::ng-deep .apps_menu.mat-menu-panel{
+  padding: 15px 15px;
+  background-color: #FFFFFF;
+  border: 1px solid #6699D2;
+  max-width: max-content;
+  min-width: min-content;
+  margin-top: 1px;
+}
+::ng-deep .apps_menu .mat-menu-content{
+  
+  width: 100%;
+}
+
+::ng-deep .appsmenu_grid{
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+  margin: 0 auto;
+  max-width: 370px;
+}
+
+::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item .apps_menu__iconwrapper{
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .apps_menu__icon{
+  width: 35px;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .apps_menu__name{
+  display: block;
+  margin-bottom: 0px;
+  color: #1d1a1a;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  white-space: break-spaces;
+  font-family: Open Sans, sans-serif;
+}
+
+
+/**************************
+  icons hover effect start 
+**************************/
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .hover_border{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item::after,
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item::before,
+::ng-deep .apps_menu.mat-menu-panel .hover_border::after,
+::ng-deep .apps_menu.mat-menu-panel .hover_border::before{
+  content:"";
+  position: absolute;
+  transition: all 0.2s linear;
+  background-color: #6699D2;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item::after,
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item::before{
+  width: 0;
+  height: 1px;
+}
+::ng-deep .apps_menu.mat-menu-panel .hover_border::after,
+::ng-deep .apps_menu.mat-menu-panel .hover_border::before{
+  width: 1px;
+  height: 0;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover{
+  background: unset !important;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover::after,
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover::before{
+  width: 100%;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover .hover_border::after,
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover .hover_border::before{
+  height: 100%;
+}
+
+/* transition defualt start */
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item::after{
+  left: 0;
+  bottom: 0;
+  transition-delay: 0.6s;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item::before{
+  right: 0;
+  top: 0;
+  transition-delay: 0.2s;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .hover_border::after{
+  transition-delay: 0.4s;
+  right: 0;
+  bottom: 0
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .hover_border::before{
+  transition-delay: 0s;
+  left: 0;
+  top: 0;
+}
+/* transition defualt end */
+
+/* transition on hover start */
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover::after{
+  transition-delay: 0s;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover::before{
+  transition-delay: 0.4s;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover .hover_border::after{
+  transition-delay: 0.2s;
+}
+::ng-deep .apps_menu.mat-menu-panel .apps_menu__item:hover .hover_border::before{
+  transition-delay: 0.6s;
+}
+/* transition on hover end */
+/**************************
+  icons hover effect end 
+**************************/
+
+@media screen and (min-width: 1025px) {
+  ::ng-deep .apps_menu.mat-menu-panel  .apps_menu__item .apps_menu__iconwrapper{
+    height: 40px;
+  }
+  ::ng-deep .apps_menu.mat-menu-panel .apps_menu__item .apps_menu__icon{
+    width: 40px;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  ::ng-deep .apps_menu.mat-menu-panel .mat-menu-content .apps_menu__item{
+    height: auto !important;
+  }
+  
+  .appsmenu_grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  ::ng-deep .cdk-overlay-pane:not(.owl-dt-popup) {
+      transform: unset !important;
+      margin: unset !important;
+  }
+
+}
+/* org copy  */

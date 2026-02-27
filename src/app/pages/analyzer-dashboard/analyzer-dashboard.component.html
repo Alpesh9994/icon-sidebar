@@ -1,0 +1,86 @@
+<div class="dashboard">
+
+  <!-- 1️⃣ Row: Summary Cards -->
+  <div class="card-row">
+    <div class="summary-card" *ngFor="let card of [1,2,3,4,5]">
+      <div class="card-title">Metric {{card}}</div>
+      <div class="card-value">{{1000 + card * 245}}</div>
+    </div>
+  </div>
+
+  <!-- 2️⃣ Row: Doughnut Charts -->
+  <div class="chart-row">
+    <div class="chart-card" *ngFor="let chart of [1,2,3]; let i = index">
+      <canvas id="doughnut{{i+1}}"></canvas>
+    </div>
+  </div>
+
+  <!-- 3️⃣ Row: Table -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Analyzer</th>
+          <th>Status</th>
+          <th>Tests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of [1,2,3,4,5]">
+          <td>Analyzer {{row}}</td>
+          <td>Active</td>
+          <td>{{row * 45}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4️⃣ Row: Bar Charts -->
+  <div class="chart-row lst-chart-row">
+    <div class="chart-card">
+      <canvas id="barChart1"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="barChart2"></canvas>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Analyzer</th>
+          <th>Status</th>
+          <th>Tests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of [1,2,3,4,5]">
+          <td>Analyzer {{row}}</td>
+          <td>Active</td>
+          <td>{{row * 45}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Analyzer</th>
+          <th>Status</th>
+          <th>Tests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of [1,2,3,4,5]">
+          <td>Analyzer {{row}}</td>
+          <td>Active</td>
+          <td>{{row * 45}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

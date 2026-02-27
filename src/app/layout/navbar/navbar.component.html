@@ -4,5 +4,31 @@
     <span></span>
     <span></span>
   </button>
-  <nav><h4>Navbar</h4></nav>
+
+  <div class="navbar_left">
+    <app-breadcrumb></app-breadcrumb>
+  </div>
+
+  <div class="header_items__wrapper">
+    <div class="header_menu__item align-items-center mx-2 d-none d-lg-flex">
+      <mat-form-field class="cusomt_select" appearance="outline">
+        <mat-select placeholder="Select Option" [(value)]="selectedValue">
+          <mat-option value="option1" selected>Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <app-dynamic-apps-menu></app-dynamic-apps-menu>
+    <div class="header_menu__item">
+      <button mat-icon-button class="header_menu__btn">
+        <img src="assets/icons/no-notifcation.svg" alt="no notification">
+      </button>
+    </div>
+    <div class="header_menu__item" >
+      <button mat-icon-button class="header_menu__btn">
+        <img src="assets/icons/user-icon-gray.svg" alt="user-icon-gray">
+      </button>
+    </div>
+  </div>
 </header>

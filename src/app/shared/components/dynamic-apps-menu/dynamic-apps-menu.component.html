@@ -1,0 +1,72 @@
+<div class="header_menu__item">
+  <button mat-icon-button [matMenuTriggerFor]="appsMenu" class="header_menu__btn">
+    <img src="assets/icons/apps-bar.svg" alt="apps-bar">
+  </button>
+</div>
+<mat-menu #appsMenu="matMenu" class="apps_menu" xPosition="after" yPosition="below" overlapTrigger="false">
+  <div class="appsmenu_grid">
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/config.svg" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">Config</span>
+      </button>
+    </div>
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/sangrah.svg" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">MilkSangrah</span>
+      </button>
+    </div>
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/bmc.svg" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">SmartBox</span>
+      </button>
+    </div>
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/milkochill.png" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">MilkoChill</span>
+      </button>
+    </div>
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/warewatch.svg" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">WareWatch</span>
+      </button>
+    </div>
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/mbright.svg" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">MBRight</span>
+      </button>
+    </div>
+    <div class="appsmenu_items" >
+      <button mat-menu-item class="apps_menu__item">
+        <span class="hover_border"></span>
+        <div class="apps_menu__iconwrapper">
+          <img src="assets/icons/vision.svg" class="apps_menu__icon"/>
+        </div>
+        <span class="apps_menu__name">Vision</span>
+      </button>
+    </div>
+  </div>
+</mat-menu>

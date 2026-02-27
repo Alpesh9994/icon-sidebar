@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,15 @@ import { RoleComponent } from './pages/role/role.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ErrorLogsComponent } from './pages/error-logs/error-logs.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'
+import { IonicModule } from '@ionic/angular';
+import { BreadcrumbComponent } from './shared/components/breadcrumb/breadcrumb.component';
+import { DynamicAppsMenuComponent } from './shared/components/dynamic-apps-menu/dynamic-apps-menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSelectModule} from '@angular/material/select';
+import { AnalyzerDashboardComponent } from './pages/analyzer-dashboard/analyzer-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -31,17 +40,26 @@ import { ErrorLogsComponent } from './pages/error-logs/error-logs.component';
     SupportComponent,
     RoleComponent,
     FooterComponent,
-    ErrorLogsComponent
+    ErrorLogsComponent,
+    BreadcrumbComponent,
+    DynamicAppsMenuComponent,
+    AnalyzerDashboardComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
     FormsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    IonicModule.forRoot(),
+    MatSelectModule
   ],
   providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

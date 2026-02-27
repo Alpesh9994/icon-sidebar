@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, O
 import { HttpClient } from '@angular/common/http';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { MenuService } from 'src/app/shared/service/menu.service';
 
 
 interface MenuItem {
@@ -10,19 +11,20 @@ interface MenuItem {
   icon: string;
   routerLink: string | null;
   children: MenuItem[];
+  parent?: MenuItem;
 }
 
-interface SubMenuItem {
-  id: string;
-  label: string;
-  hasSubmenu?: boolean;
-  submenu?: SubSubMenuItem[];
-}
+// interface SubMenuItem {
+//   id: string;
+//   label: string;
+//   hasSubmenu?: boolean;
+//   submenu?: SubSubMenuItem[];
+// }
 
-interface SubSubMenuItem {
-  id: string;
-  label: string;
-}
+// interface SubSubMenuItem {
+//   id: string;
+//   label: string;
+// }
 
 
 @Component({
@@ -40,8 +42,6 @@ export class SidebarComponent implements OnInit, AfterViewInit,OnChanges {
   @ViewChild('pixelGrid') pixelGrid!: ElementRef<HTMLDivElement>;
 
   expandedMenu = '';
-  // expandedSubmenu = '';
-  // expandedMap: { [key: string]: boolean } = {};
   expandedByLevel: { [level: number]: string } = {};
   
 
@@ -53,12 +53,16 @@ export class SidebarComponent implements OnInit, AfterViewInit,OnChanges {
   menuItems: MenuItem[] = [];
 
   constructor(
-    private http: HttpClient,
+    private menuService: MenuService,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.loadMenu();
+
+    this.menuService.menu$.subscribe(menu => {
+      this.menuItems = menu;
+      this.flatMenuList = this.flattenMenu(menu);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -83,19 +87,7 @@ export class SidebarComponent implements OnInit, AfterViewInit,OnChanges {
     this.searchTerm = '';
     this.filteredMenuList = [];
   }
-  // ngOnChanges(changes: SimpleChanges): void {
-
-  //   if (changes['isMobileOpen'] && !changes['isMobileOpen'].currentValue) {
-
-  //     // Reset submenu state
-  //     this.closeAllMenusState();
-
-  //     // 🔥 Reset search state
-  //     this.isSearchOpen = false;
-  //     this.searchTerm = '';
-  //     this.filteredMenuList = [];
-  //   }
-  // }
+  
   ngAfterViewInit(): void {
     Promise.resolve().then(() => {
       this.createPixels();
@@ -141,53 +133,6 @@ export class SidebarComponent implements OnInit, AfterViewInit,OnChanges {
     };
   }
 
-  loadMenu(parentModuleId: any = 0) {
-    // ✔ Default parent (your root group ID)
-    if (parentModuleId === 0) {
-      parentModuleId = '66uuPQfhZlCKLjHGm2CMwA==';
-    }
-
-    this.http.get<any[]>('assets/sidemenu.json').subscribe((res) => {
-      // 1️⃣ Filter and sort according to your rules
-      const filtered = res
-        .filter((a) => a.moduleType === 1 && a.isShownAsMenu === true)
-        .sort(this.dynamicSort('moduleIndex'));
-
-      console.log('Filtered menu:', filtered);
-
-      // 2️⃣ Create map for lookup
-      const menuMap = new Map<string, MenuItem>();
-
-      filtered.forEach((m) => {
-        menuMap.set(m.moduleId, {
-          id: m.moduleId,
-          label: m.displayName,
-          icon: m.icon || 'alert-circle-outline',
-          routerLink: m.routerLink,
-          children: [],
-        });
-      });
-
-      // 3️⃣ Build final hierarchy
-      const rootMenu: MenuItem[] = [];
-
-      filtered.forEach((m) => {
-        const item = menuMap.get(m.moduleId)!;
-
-        // If parent exists → assign as child
-        if (m.parentModuleId && menuMap.has(m.parentModuleId)) {
-          menuMap.get(m.parentModuleId)!.children.push(item);
-        }
-        // Otherwise → this is root-level menu
-        else if (m.parentModuleId === parentModuleId) {
-          rootMenu.push(item);
-        }
-      });
-
-      this.menuItems = rootMenu;
-      this.flatMenuList = this.flattenMenu(this.menuItems);
-    });
-  }
 
   flattenMenu(items: MenuItem[]): { label: string; routerLink: string }[] {
 

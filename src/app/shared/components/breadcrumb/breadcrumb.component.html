@@ -1,0 +1,18 @@
+<div class="breadcrumb_container" *ngIf="breadcrumbs.length">
+
+  <!-- 🔥 Page Title -->
+  <div class="breadcrumb_title">
+    {{ breadcrumbs[breadcrumbs.length - 1]?.label }}
+  </div>
+
+  <!-- 🔥 Full Path (Not Clickable) -->
+  <div class="breadcrumb_path">
+    <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+      <span>
+        {{ crumb.label }}
+      </span>
+      <span *ngIf="!last" class="separator"> / </span>
+    </ng-container>
+  </div>
+
+</div>

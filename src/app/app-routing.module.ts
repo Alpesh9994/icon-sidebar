@@ -8,6 +8,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SupportComponent } from './pages/support/support.component';
 import { RoleComponent } from './pages/role/role.component';
 import { ErrorLogsComponent } from './pages/error-logs/error-logs.component';
+import { AnalyzerDashboardComponent } from './pages/analyzer-dashboard/analyzer-dashboard.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'support', component: SupportComponent },
   { path: 'role', component: RoleComponent },
   { path: 'errorlogs', component: ErrorLogsComponent },
+  { path: 'milkanalyzerdashboard', component: AnalyzerDashboardComponent },
 ];
 
 @NgModule({
